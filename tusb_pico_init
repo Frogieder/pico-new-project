@@ -1,0 +1,22 @@
+#! /bin/bash
+
+mkdir $1
+echo Creating new directory
+cd $1 
+git init
+git submodule add https://github.com/hathach/tinyusb.git
+cd tinyusb
+git submodule update --init lib
+cd ..
+echo Copying template files
+cp ~/install_scripts/pico-new-project/template/* $1 -r
+echo Init done
+echo Set required variables for build:
+echo CMake options: 
+echo -DFAMILY=rp2040 -DBOARD=raspberry_pi_pico
+echo
+echo Build options:
+echo -- -j 6
+echo
+echo Enviroment:
+echo PICO_SDK_PATH=/home/martin/pico/pico-sdk
